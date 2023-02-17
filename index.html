@@ -1,0 +1,73 @@
+<head>
+    <title></title>
+    <script src="../jquery-3.6.3.min.js"></script>
+    <script src="../knockout-3.5.1.js"></script>
+</head>
+
+<div>
+    <h2>Maintain Products</h2>
+    <div class="caption"><b>Product Number</b></div>
+    <input id="empName" data-bind="value: productNumber" class="text"></input><br/>
+    <div class="caption">Product Description </div>
+    <input id="empSal" data-bind="value: productDescription" class="text" /><br/>
+    <div class="caption">Weight Per Unit Of Measure</div>
+    <input id="empSal" data-bind="value: weight" class="text" /><br/>
+    <div class="caption">List Price</div>
+    <input id="empSal" data-bind="value: listPrice" class="text" /><br/>
+    <div class="caption">Country Of Origin</div>
+    <input id="empSal" data-bind="value: countryOfOrigin" class="text" /><br/>
+    <div class="caption">Product Class</div>
+    <label><input type="radio" name="myRadio" value="Bicycles" data-bind="checked: selectedOption" /> Bicycles</label>
+    <label><input type="radio" name="myRadio" value="Accessories" data-bind="checked: selectedOption" />Accessories</label>
+    <label><input type="radio" name="myRadio" value="clothing" data-bind="checked: selectedOption" /> clothing</label><br/>
+    <div class="caption">Unit Of Measure</div>
+    <select data-bind="options: availableOptions, value: dropdownOption">
+        
+        <option></option>
+    </select></div>
+</br>
+
+
+<input type="button" data-bind="click:saveToJson" value="Accept" />
+
+
+
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        // viewmodel
+        let product = {
+            productNumber: ko.observable(),
+            productDescription: ko.observable(),
+            weight: ko.observable(),
+            listPrice: ko.observable(),
+            countryOfOrigin: ko.observable(),
+            selectedOption: ko.observable(),
+            //availableOptions: ko.observableArray(["kilogram (kg)", " Miligram(mg)", "gram"]),
+            dropdownOption: ko.observable()
+        };
+        // employee.empName.subscribe(function (newValue) {
+        //     console.log(newValue);
+        // });
+        product.saveToJson = function() {
+            const Data = ko.toJSON(product);
+            const promise = fetch("http://localhost:3000/products", {
+                method: 'post',
+                body: Data,
+                headers: {
+                    'content-type': 'application/json'
+                }
+            });
+
+            $("#result").text(Data);
+        };
+        // initializa the bindings
+        ko.applyBindings(product);
+    });
+</script>

@@ -1,0 +1,16 @@
+{
+  "products": {
+    "productNumber": "1",
+    "productDescription": "sfd",
+    "weight": "we332",
+    "listPrice": "44",
+    "countryOfOrigin": "vvvvv",
+    "selectedOption": "Bicycles",
+    "availableOptions": [
+      "kilogram (kg)",
+      " Miligram(mg)",
+      "gram"
+    ],
+    "dropdownOption": " Miligram(mg)"
+  }
+}
